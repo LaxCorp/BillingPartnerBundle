@@ -1,0 +1,63 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    LaxCorp\BillingPartnerBundle\Helper\RestHelper:
+        arguments:
+            $apiUrl: '%billing_partner.url%'
+            $login: '%billing_partner.login%'
+            $password: '%billing_partner.password%'
+            $restClient: '@circle.restclient'
+            $logger: '@logger'
+
+    LaxCorp\BillingPartnerBundle\Helper\MappingHelper:
+        arguments:
+            $serializer: '@jms_serializer'
+
+    billing_partner.helper.currency_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\CurrencyHelper
+        arguments:
+            $currencyCode: '%billing_partner.currency_code%'
+
+    billing_partner.helper.customer_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\CustomerHelper
+
+    billing_partner.helper.account_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\AccountHelper
+
+    billing_partner.helper.template_tariff_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\TemplateTariffHelper
+
+    billing_partner.helper.customer_tariff_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\CustomerTariffHelper
+
+    billing_partner.helper.permission_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\PermissionsHelper
+
+    billing_partner.helper.event_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\EventHelper
+
+    billing_partner.helper.replace_tariff_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\ReplaceTariffHelper
+
+    billing_partner.helper.account_operation_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\AccountOperationHelper
+
+    billing_partner.helper.customer_payments_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\CustomerPaymentsHelper
+
+    billing_partner.helper.account_deferred_payment_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\AccountDeferredPaymentHelper
+
+    billing_partner.helper.service_operation_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\ServiceOperationHelper
+
+    billing_partner.helper.service_resource_helper:
+        class: LaxCorp\BillingPartnerBundle\Helper\ServiceResourceHelper
