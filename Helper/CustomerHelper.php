@@ -70,7 +70,7 @@ class CustomerHelper extends BaseHelper
     {
         $query = new SearchQuery();
 
-        $query->setSearch('email:'. $email);
+        $query->setSearch('email:' . urlencode($email));
 
         return $this->find($query);
     }
@@ -82,7 +82,7 @@ class CustomerHelper extends BaseHelper
     {
         $query = new SearchQuery();
 
-        $query->setSearch('login:' . $login);
+        $query->setSearch('login:' . urlencode($login));
 
         /** @var Customer $customer */
         $customer = $this->findOneBy($query);
