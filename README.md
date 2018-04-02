@@ -1,6 +1,5 @@
 Billing partner helper
 =======================================================
-For billing ^1.2.2
 
 Install 
 -------

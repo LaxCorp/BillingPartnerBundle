@@ -4,7 +4,7 @@ namespace LaxCorp\BillingPartnerBundle\Helper;
 
 use Circle\RestClientBundle\Exceptions\CurlException;
 use Circle\RestClientBundle\Services\RestInterface;
-use Symfony\Bridge\Monolog\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * @inheritdoc
@@ -33,24 +33,24 @@ class RestHelper
     private $password;
 
     /**
-     * @var Logger
+     * @var LoggerInterface
      */
     private $logger;
 
     /**
      * RestHelper constructor.
      *
-     * @param string        $apiUrl
-     * @param string        $login
-     * @param string        $password
+     * @param string          $apiUrl
+     * @param string          $login
+     * @param string          $password
      *
-     * @param RestInterface $restClient
-     * @param Logger        $logger
+     * @param RestInterface   $restClient
+     * @param LoggerInterface $logger
      *
      * @internal param $url
      */
     public function __construct(
-        string $apiUrl, string $login, string $password, RestInterface $restClient, Logger $logger
+        string $apiUrl, string $login, string $password, RestInterface $restClient, LoggerInterface $logger
     ) {
         $this->restClient = $restClient;
         $this->apiUrl     = $apiUrl;
@@ -83,7 +83,7 @@ class RestHelper
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Get text result: ' . "\n" . $resultContent);
+        $this->logger->info('Get text result: ', ['result'=> $resultContent]);
 
         return $resultContent;
     }
@@ -112,7 +112,7 @@ class RestHelper
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Get json result: ' . "\n" . $resultContent);
+        $this->logger->info('Get json result: ', ['result'=> $resultContent]);
 
         return $resultContent;
     }
@@ -141,7 +141,7 @@ class RestHelper
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Post result: ' . "\n" . $resultContent);
+        $this->logger->info('Post result: ', ['result'=> $resultContent]);
 
         return $resultContent;
     }
@@ -170,7 +170,7 @@ class RestHelper
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Put result: ' . "\n" . $resultContent);
+        $this->logger->info('Put result: ', ['result'=> $resultContent]);
 
         return $resultContent;
     }
@@ -198,7 +198,7 @@ class RestHelper
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Delete result: ' . "\n" . $resultContent);
+        $this->logger->info('Delete result: ', ['result'=> $resultContent]);
 
         return $resultContent;
     }

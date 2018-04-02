@@ -16,6 +16,7 @@ class CustomerHelper extends BaseHelper
     // пользовательская блокировка
     const STATE_ENABLED = 'ENABLED';
     const STATE_DISABLED = 'DISABLED';
+    const STATE_DELETED = 'DELETED';
 
     /**
      * @var string
