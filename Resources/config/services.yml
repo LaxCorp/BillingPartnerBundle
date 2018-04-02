@@ -21,6 +21,10 @@ services:
         arguments:
             $serializer: '@jms_serializer'
 
+    LaxCorp\BillingPartnerBundle\Helper\VersionHelper:
+
+    LaxCorp\BillingPartnerBundle\Helper\Test:
+
     billing_partner.helper.currency_helper:
         class: LaxCorp\BillingPartnerBundle\Helper\CurrencyHelper
         arguments:
