@@ -46,4 +46,23 @@ class EventHelper extends BaseHelper
         return $this->find($query);
     }
 
+
+    /**
+     * @param int $accountId
+     *
+     * @return Event|null
+     */
+    public function getPrognoseLimitReached(int $accountId)
+    {
+
+        $query = new SearchQuery();
+
+        $currentTimestampmills = time() * 1000;
+
+        $query->setSearch("account.id:{$accountId},eventType:PROGNOSE_LIMIT_REACHED,validTo>{$currentTimestampmills}");
+        $query->setSort('id,desc');
+
+        return $this->findOneBy($query);
+    }
+
 }
