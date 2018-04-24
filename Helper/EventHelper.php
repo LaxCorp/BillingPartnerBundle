@@ -39,8 +39,9 @@ class EventHelper extends BaseHelper
         }
 
         $currentTimestampmills = time() * 1000;
-
-        $query->setSearch("id>{$lastId},validTo>" . $currentTimestampmills);
+        // отключено из за отстутствия validTo в событии DEFFERED_PAYMENT_OVERDUE
+        //$query->setSearch("id>{$lastId},validTo>" . $currentTimestampmills);
+        $query->setSearch("id>{$lastId}" . $currentTimestampmills);
         $query->setSort('id,asc');
 
         return $this->find($query);
