@@ -88,7 +88,6 @@ class RestHelper
         return $resultContent;
     }
 
-
     /**
      * @param string $path
      *
@@ -96,23 +95,31 @@ class RestHelper
      */
     public function getJson(string $path)
     {
+        $method = 'GET';
+
         $url = $this->makeUrl($path);
 
-        $this->logger->info('Get json: ' . $url);
-
         $header = $this->getAuthHeader();
+
+        $logContext = $this->logContext($url, $method);
 
         try {
             $query = $this->restClient->get($url, $header);
         } catch (CurlException $exception) {
-            $this->logger->error('Get json error: ' . $exception->getMessage());
+            $this->logger->error("{$method} error: " . $exception->getMessage(), $logContext);
 
             return $exception;
         }
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Get json result: ', ['result'=> $resultContent]);
+        $logContext = $this->logContext($url, $method, null, $resultContent);
+
+        if ($query->isServerError()) {
+            $this->logger->error("{$method} error: " . $query->getStatusCode(), $logContext);
+        } else {
+            $this->logger->info("{$method}  result:", $logContext);
+        }
 
         return $resultContent;
     }
@@ -125,23 +132,31 @@ class RestHelper
      */
     public function postJson(string $path, string $json)
     {
+        $method = 'POST';
+
         $url = $this->makeUrl($path);
 
-        $this->logger->info('Post: ' . $url);
-
         $header = $this->getAuthHeader();
+
+        $logContext = $this->logContext($url, $method, $json);
 
         try {
             $query = $this->restClient->post($url, $json, $header);
         } catch (CurlException $exception) {
-            $this->logger->error('Post error: ' . $exception->getMessage());
+            $this->logger->error("{$method} error: " . $exception->getMessage(), $logContext);
 
             return $exception;
         }
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Post result: ', ['result'=> $resultContent]);
+        $logContext = $this->logContext($url, $method, $json, $resultContent);
+
+        if ($query->isSuccessful()) {
+            $this->logger->info("{$method} result:", $logContext);
+        } else {
+            $this->logger->error("{$method} error: " . $query->getStatusCode(), $logContext);
+        }
 
         return $resultContent;
     }
@@ -154,23 +169,31 @@ class RestHelper
      */
     public function putJson(string $path, string $json)
     {
+        $method = 'PUT';
+
         $url = $this->makeUrl($path);
 
-        $this->logger->info('Put: ' . $url);
-
         $header = $this->getAuthHeader();
+
+        $logContext = $this->logContext($url, $method, $json);
 
         try {
             $query = $this->restClient->put($url, $json, $header);
         } catch (CurlException $exception) {
-            $this->logger->error('Put error: ' . $exception->getMessage());
+            $this->logger->error("{$method} error: " . $exception->getMessage(), $logContext);
 
             return $exception;
         }
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Put result: ', ['result'=> $resultContent]);
+        $logContext = $this->logContext($url, $method, $json, $resultContent);
+
+        if ($query->isSuccessful()) {
+            $this->logger->info("{$method} result:", $logContext);
+        } else {
+            $this->logger->error("{$method} error: " . $query->getStatusCode(), $logContext);
+        }
 
         return $resultContent;
     }
@@ -182,25 +205,46 @@ class RestHelper
      */
     public function delete(string $path)
     {
+        $method = 'DELETE';
+
         $url = $this->makeUrl($path);
 
-        $this->logger->info('Delete: ' . $url);
-
         $header = $this->getAuthHeader();
+
+        $logContext = $this->logContext($url, $method);
 
         try {
             $query = $this->restClient->delete($url, $header);
         } catch (CurlException $exception) {
-            $this->logger->error('Delete error: ' . $exception->getMessage());
+            $this->logger->error("{$method} error: " . $exception->getMessage(), $logContext);
 
             return $exception;
         }
 
         $resultContent = $query->getContent();
 
-        $this->logger->info('Delete result: ', ['result'=> $resultContent]);
+        $logContext = $this->logContext($url, $method, null, $resultContent);
+
+        if ($query->isSuccessful()) {
+            $this->logger->info("{$method} result:", $logContext);
+        } else {
+            $this->logger->error("{$method} error: " . $query->getStatusCode(), $logContext);
+        }
 
         return $resultContent;
+    }
+
+    /**
+     * @param string $url
+     * @param string $method
+     * @param null   $send
+     * @param null   $result
+     *
+     * @return array
+     */
+    private function logContext($url = '', $method = '', $send = null, $result = null)
+    {
+        return ['url' => $url, 'method' => $method, 'send' => $send, 'result' => $result];
     }
 
     /**

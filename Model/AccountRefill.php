@@ -2,6 +2,8 @@
 
 namespace LaxCorp\BillingPartnerBundle\Model;
 
+use JMS\Serializer\Annotation as Serializer;
+
 /**
  * @inheritdoc
  */
@@ -16,6 +18,8 @@ class AccountRefill
 
     /**
      * @var int
+     * @Serializer\SerializedName("customerId")
+     * @Serializer\Type("integer")
      */
     private $customerId;
 

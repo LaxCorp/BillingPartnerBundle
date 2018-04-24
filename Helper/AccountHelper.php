@@ -55,7 +55,7 @@ class AccountHelper extends BaseHelper
             $limit     = 1;
             $customers = $this->customerHelper->getCustomersByAccountId($accountId, $limit);
             foreach ($customers as $customer) {
-                $accountRefill->setCustomerId($this->IdResolver($customer));
+                $accountRefill->setCustomerId($customer->getId());
                 break;
             }
 
