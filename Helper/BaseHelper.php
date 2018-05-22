@@ -188,6 +188,10 @@ abstract class BaseHelper
             return $mixed;
         }
 
+        if ($type === 'string') {
+            return (int) $mixed;
+        }
+
         if ($type === 'object' && get_class($mixed) === $this->class) {
             /** @var object $mixed */
             return $mixed->getId();
