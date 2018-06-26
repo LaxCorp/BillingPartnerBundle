@@ -5,7 +5,7 @@ namespace LaxCorp\BillingPartnerBundle\Model;
 /**
  * @inheritdoc
  */
-class CustomerPermissions extends Permissions
+class CustomerTariffPermissions extends Permissions
 {
 
 }

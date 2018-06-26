@@ -17,13 +17,11 @@ class Customer
     use Traits\ToDateTrait;
     use Traits\LastUpdateTrait;
     use Traits\AccountTrait;
-    use Traits\DeferredPaymentPeriodTrait;
     use Traits\AcquisitionFeePaidTrait;
+    use Traits\DeferredPaymentPeriodTrait;
+    use Traits\PrognosePeriodTrait;
     use Traits\StateTrait;
-    use Traits\PermissionsTrait;
-    use Traits\CustomerPermissionsTrait;
     use Traits\CustomerTariffsTrait;
     use Traits\BillingStateTrait;
-    use Traits\PrognosePeriodTrait;
 
 }

@@ -14,8 +14,10 @@ class ServiceTariffs
     use Traits\OveruseClickPriceTrait;
     use Traits\AcquisitionPriceTrait;
     use Traits\BillingPeriodTrait;
+    use Traits\CustomBillingPeriodDaysTrait;
     use Traits\ClicksCountTrait;
     use Traits\AvailableClicksCountTrait;
     use Traits\UsedClicksCountTrait;
+    use Traits\DateTrait;
 
 }

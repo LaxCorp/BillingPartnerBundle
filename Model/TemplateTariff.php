@@ -13,9 +13,11 @@ class TemplateTariff
     use Traits\CreatedTrait;
     use Traits\CurrencyTrait;
     use Traits\BillingPeriodTrait;
+    use Traits\CustomBillingPeriodDaysTrait;
     use Traits\SubscriptionPriceTrait;
     use Traits\TypeTrait;
     use Traits\StateTrait;
     use Traits\ServiceTariffsTrait;
+    use Traits\TemplatePermissionsTrait;
 
 }

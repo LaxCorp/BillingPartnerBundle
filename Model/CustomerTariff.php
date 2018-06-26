@@ -10,24 +10,27 @@ class CustomerTariff
 
     use Traits\IdTrait;
     use Traits\NameTrait;
-    use Traits\TypeTrait;
     use Traits\CreatedTrait;
-    use Traits\ActivationDateTrait;
-    use Traits\TarificationDateTrait;
-    use Traits\DeactivationDateTrait;
-    use Traits\SubscriptionDateTrait;
     use Traits\CurrencyTrait;
-    use Traits\MultiplierTrait;
     use Traits\BillingPeriodTrait;
-    use Traits\AcquisitionPriceTrait;
+    use Traits\CustomBillingPeriodDaysTrait;
     use Traits\SubscriptionPriceTrait;
+    use Traits\TypeTrait;
     use Traits\StateTrait;
     use Traits\ServiceTariffsTrait;
+    use Traits\TemplatePermissionsTrait;
+    use Traits\MultiplierTrait;
     use Traits\AutoRenewalTrait;
+    use Traits\SubscriptionDateTrait;
     use Traits\TariffTrait;
     use Traits\ActiveTrait;
-    use Traits\ReplaceChildTrait;
-    use Traits\IsReplacementTrait;
+    use Traits\CustomerTariffPermissionsTrait;
     use Traits\IsUsingByCustomerTrait;
+    use Traits\IsReplacementTrait;
+    use Traits\ReplaceChildTrait;
+    use Traits\TarificationDateTrait;
+    use Traits\ActivationDateTrait;
+    use Traits\DeactivationDateTrait;
+    use Traits\AcquisitionPriceTrait;
 
 }
