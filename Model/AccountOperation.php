@@ -16,7 +16,6 @@ class AccountOperation
     use Traits\TariffSubscriptionPriceTrait;
     use Traits\TariffBillingPeriodTrait;
     use Traits\ClicksCountTrait;
-    use Traits\TariffTrait;
     use Traits\CreatedTrait;
     use Traits\ClosedTrait;
     use Traits\KindTrait;
