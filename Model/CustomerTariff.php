@@ -25,8 +25,8 @@ class CustomerTariff
     use Traits\TariffTrait;
     use Traits\ActiveTrait;
     use Traits\CustomerTariffPermissionsTrait;
-    use Traits\IsUsingByCustomerTrait;
-    use Traits\IsReplacementTrait;
+    use Traits\UsingByCustomerTrait;
+    use Traits\ReplacementTrait;
     use Traits\ReplaceChildTrait;
     use Traits\TarificationDateTrait;
     use Traits\ActivationDateTrait;

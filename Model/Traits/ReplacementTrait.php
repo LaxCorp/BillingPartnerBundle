@@ -7,23 +7,23 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @inheritdoc
  */
-trait IsReplacementTrait
+trait ReplacementTrait
 {
 
     /**
      * @var bool
      *
-     * @Serializer\SerializedName("isReplacement")
+     * @Serializer\SerializedName("replacement")
      * @Serializer\Type("boolean")
      */
-    private $isReplacement;
+    private $replacement;
 
     /**
      * @inheritdoc
      */
-    public function setIsReplacement($isReplacement)
+    public function setReplacement($replacement)
     {
-        $this->isReplacement = $isReplacement;
+        $this->replacement = $replacement;
 
         return $this;
     }
@@ -31,9 +31,9 @@ trait IsReplacementTrait
     /**
      * @inheritdoc
      */
-    public function getIsReplacement()
+    public function getReplacement()
     {
-        return $this->isReplacement;
+        return $this->replacement;
     }
 
 }

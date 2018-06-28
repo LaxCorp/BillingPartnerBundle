@@ -7,23 +7,23 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @inheritdoc
  */
-trait IsUsingByCustomerTrait
+trait UsingByCustomerTrait
 {
 
     /**
      * @var bool
      *
-     * @Serializer\SerializedName("isUsingByCustomer")
+     * @Serializer\SerializedName("usingByCustomer")
      * @Serializer\Type("boolean")
      */
-    private $isUsingByCustomer;
+    private $usingByCustomer;
 
     /**
      * @inheritdoc
      */
-    public function setIsUsingByCustomer($isUsingByCustomer)
+    public function setIsUsingByCustomer($usingByCustomer)
     {
-        $this->isUsingByCustomer = $isUsingByCustomer;
+        $this->usingByCustomer = $usingByCustomer;
 
         return $this;
     }
@@ -31,9 +31,9 @@ trait IsUsingByCustomerTrait
     /**
      * @inheritdoc
      */
-    public function getIsUsingByCustomer()
+    public function getusingByCustomer()
     {
-        return $this->isUsingByCustomer;
+        return $this->usingByCustomer;
     }
 
 }
