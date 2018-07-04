@@ -73,7 +73,7 @@ abstract class BaseHelper
             return 0;
         }
 
-        return $result;
+        return (int) $result;
     }
 
     /**
