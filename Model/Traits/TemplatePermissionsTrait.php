@@ -17,14 +17,14 @@ trait TemplatePermissionsTrait
      * @Serializer\SerializedName("templatePermissions")
      * @Serializer\Type("array<LaxCorp\BillingPartnerBundle\Model\TemplatePermission>")
      */
-    private $templatePermission;
+    private $templatePermissions;
 
     /**
      * @inheritdoc
      */
     public function setTemplatePermissions($customerTariff)
     {
-        $this->templatePermission = $customerTariff;
+        $this->templatePermissions = $customerTariff;
 
         return $this;
     }
@@ -34,7 +34,7 @@ trait TemplatePermissionsTrait
      */
     public function getTemplatePermissions()
     {
-        return $this->templatePermission;
+        return $this->templatePermissions;
     }
 
 }
