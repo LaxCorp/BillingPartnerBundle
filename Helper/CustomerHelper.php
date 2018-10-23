@@ -16,6 +16,7 @@ class CustomerHelper extends BaseHelper
     // пользовательская блокировка
     const STATE_ENABLED = 'ENABLED';
     const STATE_DISABLED = 'DISABLED';
+    const STATE_RESTRICTED = 'RESTRICTED';
     const STATE_DELETED = 'DELETED';
 
     /**
@@ -57,7 +58,7 @@ class CustomerHelper extends BaseHelper
             $query->setSize($limit);
         }
 
-        $query->setSearch("account.id:{$accountId}");
+        $query->setSearch("account.id:{$accountId}&state:{$this->getNotDeletedState()}");
 
         return $this->find($query);
     }
@@ -71,7 +72,7 @@ class CustomerHelper extends BaseHelper
     {
         $query = new SearchQuery();
 
-        $query->setSearch('email:' . urlencode($email));
+        $query->setSearch('email:' . urlencode($email) . "&state:{$this->getNotDeletedState()}");
 
         return $this->find($query);
     }
@@ -83,7 +84,7 @@ class CustomerHelper extends BaseHelper
     {
         $query = new SearchQuery();
 
-        $query->setSearch('login:' . urlencode($login));
+        $query->setSearch('login:' . urlencode($login) . "&state:{$this->getNotDeletedState()}");
 
         /** @var Customer $customer */
         $customer = $this->findOneBy($query);
@@ -152,6 +153,14 @@ class CustomerHelper extends BaseHelper
         }
 
         return $sum;
+    }
+
+    /**
+     * @return string
+     */
+    private function getNotDeletedState()
+    {
+        return $this::STATE_ENABLED . ',' . $this::STATE_DISABLED . ',' . $this::STATE_RESTRICTED;
     }
 
 }
