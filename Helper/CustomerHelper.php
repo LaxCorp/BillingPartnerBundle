@@ -58,9 +58,9 @@ class CustomerHelper extends BaseHelper
             $query->setSize($limit);
         }
 
-        $query->setSearch("account.id:{$accountId}&state:{$this->getNotDeletedState()}");
+        $query->setSearch('account.id:' . $accountId . '&state:' . $this->getNotDeletedState());
 
-        return $this->find($query);
+        return $this->findRaw($query);
     }
 
     /**
@@ -77,9 +77,9 @@ class CustomerHelper extends BaseHelper
             $query->setSize($limit);
         }
 
-        $query->setSearch("account.id:{$accountId}&state:{$this::STATE_DELETED}");
+        $query->setSearch('account.id:' . $accountId . '&state:' . $this::STATE_DELETED);
 
-        return $this->find($query);
+        return $this->findRaw($query);
     }
 
     /**
@@ -91,9 +91,9 @@ class CustomerHelper extends BaseHelper
     {
         $query = new SearchQuery();
 
-        $query->setSearch('email:' . urlencode($email) . "&state:{$this->getNotDeletedState()}");
+        $query->setSearch('email:' . urlencode($email) . '&state:' . $this->getNotDeletedState());
 
-        return $this->find($query);
+        return $this->findRaw($query);
     }
 
     /**
@@ -103,10 +103,10 @@ class CustomerHelper extends BaseHelper
     {
         $query = new SearchQuery();
 
-        $query->setSearch('login:' . urlencode($login) . "&state:{$this->getNotDeletedState()}");
+        $query->setSearch('login:' . urlencode($login) . '&state:' . $this->getNotDeletedState());
 
         /** @var Customer $customer */
-        $customer = $this->findOneBy($query);
+        $customer = $this->findOneByRaw($query);
 
         return $customer;
     }

@@ -91,11 +91,55 @@ abstract class BaseHelper
     /**
      * @inheritdoc
      */
+    public function findRaw(SearchQuery $query, $pathVars = [])
+    {
+        $path = $this->pathParser($this::PATH, $pathVars) . '/?' . $this->queryRaw($query);
+
+        $json = $this->restHelper->getJson($path);
+
+        return $this->mappingHelper->deserialize($json, 'ArrayCollection<' . $this->class . '>');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function queryRaw(SearchQuery $query, $pathVars = [])
+    {
+        $raw       = '';
+        $separator = '';
+        foreach ($query as $key => $value) {
+            $raw .= $separator . $key . '=' . $value;
+
+            $separator = '&';
+        }
+
+        return $raw;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function findOneBy(SearchQuery $query, $pathVars = [])
     {
         $query->setSize(1);
 
         $results = $this->find($query, $pathVars);
+
+        foreach($results as $result){
+            return $result;
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function findOneByRaw(SearchQuery $query, $pathVars = [])
+    {
+        $query->setSize(1);
+
+        $results = $this->findRaw($query, $pathVars);
 
         foreach($results as $result){
             return $result;
