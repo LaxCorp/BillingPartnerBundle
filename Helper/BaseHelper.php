@@ -103,7 +103,7 @@ abstract class BaseHelper
     /**
      * @inheritdoc
      */
-    public function queryRaw(SearchQuery $query, $pathVars = [])
+    public function queryRaw(SearchQuery $query)
     {
         $raw       = '';
         $separator = '';
