@@ -64,6 +64,25 @@ class CustomerHelper extends BaseHelper
     }
 
     /**
+     * @param int      $accountId
+     * @param int|null $limit
+     *
+     * @return Customer[]
+     */
+    public function getDeletedCustomersByAccountId(int $accountId, int $limit = null)
+    {
+        $query = new SearchQuery();
+
+        if ($limit) {
+            $query->setSize($limit);
+        }
+
+        $query->setSearch("account.id:{$accountId}&state:{$this::STATE_DELETED}");
+
+        return $this->find($query);
+    }
+
+    /**
      * @param string $email
      *
      * @return Customer[]
@@ -131,6 +150,18 @@ class CustomerHelper extends BaseHelper
     public function enableCustomer(Customer $customer)
     {
         $customer->setState($this::STATE_ENABLED);
+
+        $customer = $this->updateCustomer($customer);
+
+        return $customer;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function deleteCustomer(Customer $customer)
+    {
+        $customer->setState($this::STATE_DELETED);
 
         $customer = $this->updateCustomer($customer);
 
