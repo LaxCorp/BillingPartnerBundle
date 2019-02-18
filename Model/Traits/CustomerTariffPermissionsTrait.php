@@ -14,7 +14,7 @@ trait CustomerTariffPermissionsTrait
     /**
      * @var CustomerTariffPermissions
      *
-     * @Serializer\SerializedName("customerPermissions")
+     * @Serializer\SerializedName("customerTariffPermissions")
      * @Serializer\Type("array<LaxCorp\BillingPartnerBundle\Model\CustomerTariffPermissions>")
      */
     private $customerTariffPermissions;
