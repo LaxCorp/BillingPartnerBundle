@@ -21,7 +21,7 @@ trait AutoRenewalTrait
     /**
      * @inheritdoc
      */
-    public function setAutoRenewal($autoRenewal)
+    public function setAutoRenewal(bool $autoRenewal)
     {
         $this->autoRenewal = $autoRenewal;
 

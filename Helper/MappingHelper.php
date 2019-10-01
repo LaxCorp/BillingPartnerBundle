@@ -2,6 +2,7 @@
 
 namespace LaxCorp\BillingPartnerBundle\Helper;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Serializer;
 
 /**
@@ -30,7 +31,7 @@ class MappingHelper
      * @param string $type
      * @param string $format
      *
-     * @return array|object
+     * @return ArrayCollection|array|object
      */
     public function deserialize(string $json, string $type, string $format = 'json')
     {

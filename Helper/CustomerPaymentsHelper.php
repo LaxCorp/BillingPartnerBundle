@@ -23,7 +23,7 @@ class CustomerPaymentsHelper extends BaseHelper
      */
     public function getCustomerPayments(Customer $customer, int $periodMills)
     {
-        $pathVars  = ['customerId' => $customer->getId()];
+        $pathVars = ['customerId' => $customer->getId()];
 
         $path = $this->pathParser($this::PATH, $pathVars) . '/' . $periodMills;
 

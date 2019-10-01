@@ -7,6 +7,11 @@ use LaxCorp\BillingPartnerBundle\Model\AccountOperation;
 use LaxCorp\BillingPartnerBundle\Model\AccountRefill;
 use LaxCorp\BillingPartnerBundle\Model\PageResult;
 use LaxCorp\BillingPartnerBundle\Query\SearchQuery;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\DBAL\Types\Type;
+use App\DBAL\Types\BillJsonArrayType;
+use App\DBAL\Types\TimestampMillsType;
 
 /**
  * НЕДОДЕЛАНО
@@ -22,6 +27,14 @@ class AccountOperationHelper extends BaseHelper
      * @var string
      */
     public $class = AccountOperation::class;
+
+    private $container;
+
+    public function __construct(RestHelper $restHelper, MappingHelper $mappingHelper, ContainerInterface $container)
+    {
+        $this->container = $container;
+        parent::__construct($restHelper, $mappingHelper);
+    }
 
     /**
      * @inheritdoc
@@ -86,7 +99,7 @@ class AccountOperationHelper extends BaseHelper
      *
      * @return string
      */
-    private function createSort($order = [])
+    public function createSort($order = [])
     {
         $sort      = '';
         $separator = '';
@@ -104,14 +117,12 @@ class AccountOperationHelper extends BaseHelper
      *
      * @return string
      */
-    private function createSearch(EntityRepository $repository, $fields = [])
+    public function createSearch(EntityRepository $repository, $fields = [])
     {
         $search = [];
 
-        $search[] = 'account.partner.login:' . $this->getPartnerLogin();
-
         /** @var EntityManager $manager */
-        $manager = $this->getManager($repository);
+        $manager = $this->container->get('doctrine')->getManager();
 
         /** @var ClassMetadata $classMetadata */
         $classMetadata = $manager->getClassMetadata($repository->getClassName());
