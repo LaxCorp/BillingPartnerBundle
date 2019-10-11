@@ -43,7 +43,9 @@ class EventHelper extends BaseHelper
         $query->setSearch("id>{$lastId},validTo>" . $currentTimestampmills);
         $query->setSort('id,asc');
 
-        return $this->find($query);
+        $result = $this->find($query);
+
+        return ($result->isEmpty()) ? null : $result;
     }
 
 
