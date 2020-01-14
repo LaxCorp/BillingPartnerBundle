@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace LaxCorp\BillingPartnerBundle\Model\Traits;
 
@@ -12,7 +13,7 @@ trait TemplatePermissionsTrait
 {
 
     /**
-     * @var TemplatePermission
+     * @var TemplatePermission[]
      *
      * @Serializer\SerializedName("templatePermissions")
      * @Serializer\Type("array<LaxCorp\BillingPartnerBundle\Model\TemplatePermission>")
