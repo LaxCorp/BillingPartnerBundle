@@ -12,7 +12,7 @@ $bundles = [
     new LaxCorp\BillingPartnerBundle\BillingPartnerBundle(),
     new Circle\RestClientBundle\CircleRestClientBundle(),
     new Symfony\Bundle\MonologBundle\MonologBundle(),
-]
+];
 ```
 
 And add in config.yaml

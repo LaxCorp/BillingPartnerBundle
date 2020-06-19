@@ -13,6 +13,7 @@ class ServiceTariffs
     use Traits\UnlimitedTrait;
     use Traits\ClicksCountTrait;
     use Traits\RequestRateLimitTrait;
+    use Traits\OperationGroupLimitsTrait;
     use Traits\OveruseClickPriceTrait;
     use Traits\BillingPeriodTrait;
     use Traits\AcquisitionPriceTrait;
