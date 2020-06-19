@@ -3,7 +3,7 @@
 namespace LaxCorp\BillingPartnerBundle\Model;
 
 /**
- *
+ * @inheritDoc
  */
 class OperationGroupLimit
 {

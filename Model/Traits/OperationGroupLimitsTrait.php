@@ -12,7 +12,7 @@ trait OperationGroupLimitsTrait
 {
 
     /**
-     * @var OperationGroupLimit
+     * @var OperationGroupLimit[]
      *
      * @Serializer\SerializedName("operationGroupLimits")
      * @Serializer\Type("array<LaxCorp\BillingPartnerBundle\Model\OperationGroupLimit>")
@@ -20,7 +20,9 @@ trait OperationGroupLimitsTrait
     private $operationGroupLimits;
 
     /**
-     * @inheritDoc
+     * @param $operationGroupLimits OperationGroupLimit[]
+     *
+     * @return $this
      */
     public function setOperationGroupLimits($operationGroupLimits)
     {
@@ -30,7 +32,7 @@ trait OperationGroupLimitsTrait
     }
 
     /**
-     * @inheritDoc
+     * @return OperationGroupLimit[]
      */
     public function getOperationGroupLimits()
     {
