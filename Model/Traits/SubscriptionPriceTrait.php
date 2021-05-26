@@ -15,6 +15,7 @@ trait SubscriptionPriceTrait
      *
      * @Serializer\SerializedName("subscriptionPrice")
      * @Serializer\Type("double")
+     * @Serializer\Expose
      */
     private $subscriptionPrice;
 

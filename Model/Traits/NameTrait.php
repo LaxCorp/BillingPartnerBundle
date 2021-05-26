@@ -14,6 +14,7 @@ trait NameTrait
      * @var string
      *
      * @Serializer\Type("string")
+     * @Serializer\Expose()
      */
     private $name;
 

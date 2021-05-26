@@ -15,6 +15,7 @@ trait StateTrait
      *
      * @Serializer\SerializedName("state")
      * @Serializer\Type("string")
+     * @Serializer\Expose
      */
     private $state;
 
