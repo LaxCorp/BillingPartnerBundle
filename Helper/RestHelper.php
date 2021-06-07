@@ -108,7 +108,7 @@ class RestHelper
         } catch (CurlException $exception) {
             $this->logger->error("{$method} error: " . $exception->getMessage(), $logContext);
 
-            return $exception;
+            return null;
         }
 
         $resultContent = $query->getContent();

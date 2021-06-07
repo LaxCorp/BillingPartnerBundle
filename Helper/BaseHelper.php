@@ -161,6 +161,10 @@ abstract class BaseHelper
 
         $json = $this->restHelper->getJson($path);
 
+        if(empty($json)){
+            return null;
+        }
+
         return $this->mappingHelper->deserialize($json, $this->class);
     }
 
