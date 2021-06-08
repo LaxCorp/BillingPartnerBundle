@@ -141,10 +141,10 @@ class AccountOperationHelper extends BaseHelper
             if ($classMetadata->hasField($field)) {
                 $fieldType = $classMetadata->getTypeOfField($field);
                 $type      = Type::getType($fieldType);
+
                 $operator  = null;
 
                 $values = $this->getValues($value);
-
                 foreach ($values as $mvalue) {
                     list($operator, $value) = $this->separateOperator($mvalue);
                     $search[] = $this->andWhere($operator, $real_filed, $type, $value);
@@ -189,8 +189,9 @@ class AccountOperationHelper extends BaseHelper
         if ($type instanceof IntegerType || $type instanceof BillJsonArrayType) {
             if ($operator === 'CONTAINS') {
                 $operator = 'EQ';
+                $value = (integer)$value;
             }
-            $value = (integer)$value;
+
         }
 
         if ($type instanceof TimestampMillsType) {
@@ -219,7 +220,6 @@ class AccountOperationHelper extends BaseHelper
             $search .= $field . '!~' . $value;
 
         } elseif ($operator == 'IN') {
-
             $search .= $field . '^' . implode('|', (array) $value);
 
         } elseif ($operator == 'LT') {
@@ -301,6 +301,7 @@ class AccountOperationHelper extends BaseHelper
     private function separateOperator($value)
     {
         $operators = [
+            '^'  => 'IN',
             '<>' => 'NEQ',
             '<=' => 'LTE',
             '>=' => 'GTE',
@@ -322,7 +323,7 @@ class AccountOperationHelper extends BaseHelper
             return ['ISNOTNULL', null];
         }
 
-        if (preg_match('/^(?:\s*(!|<>|<=|>=|<|>|=))?(.*)$/', $value, $matches)) {
+        if (preg_match('/^(?:\s*(\\^|!|<>|<=|>=|<|>|=))?(.*)$/', $value, $matches)) {
             $operator = isset($operators[$matches[1]]) ? $operators[$matches[1]] : 'CONTAINS';
             $value    = $matches[2];
 
