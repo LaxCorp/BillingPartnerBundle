@@ -6,7 +6,6 @@ use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @inheritdoc
- * @Serializer\ExclusionPolicy("all")
  */
 class CustomerTariff
 {
